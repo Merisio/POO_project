@@ -12,6 +12,9 @@ public class Dado{
     public int getFace(){
         return this.face;
     }
+    public void setFace(int f){
+        this.face = f;
+    }
 
     public String toString(){
         return "Valor: " + this.face;
