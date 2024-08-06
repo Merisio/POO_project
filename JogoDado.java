@@ -1,20 +1,26 @@
 public class JogoDado {
-    private Dado dado = new Dado();
+    private Dado[] dado;
     private int qtd;
     private int soma;
 
     public JogoDado(){}
 
     public JogoDado(int q){
+        dado = new Dado[q];
         this.qtd = q;
     }
 
     public void rolarDados(){
-        dado.roll();
+        Dado v = new Dado();
+        for( int i = 0; i < this.qtd; i++){
+            v.roll();
+            System.out.println(v);
+            dado[i].setFace(v.getFace());
+        }
     }
 
     public int somaDados(){
-        soma = this.dado.getFace() + this.dado.getFace();
+        soma = this.dado[0].getFace() + this.dado[1].getFace();
         return soma;
     }
 
@@ -42,7 +48,7 @@ public class JogoDado {
         }
 
     public String toString(){
-        return dado + " e " + dado;
+        return dado[0].getFace() + " e " + dado[1].getFace();
     }
 
     public int regraDoJogo(int valor, int procurar){
