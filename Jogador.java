@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Jogador{
     private int id;
     private int tipo;
-    private double saldo = 100.0;
+    private double saldo;
     private double valorDeAposta;
     private int instancia;
 
