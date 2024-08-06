@@ -1,6 +1,12 @@
-public class simuladorTorneio{
+import java.util.Scanner;
 
+public class simuladorTorneio{
     public static void main(String[] args){
-        Jogador[] players = new Jogador[10];
+        Scanner teclado = new Scanner(System.in);
+
+        System.out.println("Insira o número de jogadores:");
+        int num = teclado.nextInt();
+
+        Torneio campeonato = new Torneio();
     }
 }
