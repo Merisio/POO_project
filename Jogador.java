@@ -10,6 +10,24 @@ public class Jogador{
     public Jogador(int tipo){
         this.tipo = tipo;
     }
+    public void setId(int d){
+        this.id = d;
+    }
+    public void setTipo(int t){
+        this.tipo = t;
+    }
+    public void setSaldo(double s){
+        this.saldo = s;
+    }
+    public void setAposta(double v){
+        this.valorDeAposta = v;
+    }
+    public int getId(){
+        return id;
+    }
+    public int getTipo(){
+        return this.tipo;
+    }
     public double getSaldo(){
         return this.saldo;
     }
