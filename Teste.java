@@ -1,11 +1,8 @@
 public class Teste {
     public static void main(String[] args){
-        Dado v = new Dado();
-        JogoDado dice = new JogoDado();
-        dice.rolarDados();
-        int teste = dice.getSideUp();
+        JogoDado dice = new JogoDado(2);
+        dice.JogoAzar();
 
-        System.out.println(teste);
-        System.out.println(v);
+        System.out.println(dice);
     }
 }

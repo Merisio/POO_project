@@ -3,17 +3,18 @@ public class Dado{
     public int face;
     Random r = new Random();
 
-    public Dado(){}
+    public Dado(){
+        
+    }
 
     public void roll(){
-        face = r.nextInt(6) + 1;
+        this.face = r.nextInt(6) + 1;
     }
-
+    public void setFace(int a){
+        this.face = a;
+    }
     public int getFace(){
         return this.face;
-    }
-    public void setFace(int f){
-        this.face = f;
     }
 
     public String toString(){

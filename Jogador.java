@@ -10,6 +10,10 @@ public class Jogador{
     public Jogador(int tipo){
         this.tipo = tipo;
     }
+    public Jogador(int tipo, int id){
+        this.tipo = tipo;
+        this.id = id;
+    }
     public void setId(int d){
         this.id = d;
     }

@@ -1,36 +1,20 @@
 public class JogoDado {
-    private Dado[] dado;
+    private Dado dado = new Dado();
     private int qtd;
     private int soma;
-    private int valor;
 
     public JogoDado(){}
 
     public JogoDado(int q){
-        dado = new Dado[q];
         this.qtd = q;
-        this.valor = 0;
     }
-
-    public void setFace(int f){
-        this.valor = f;
-    }
-    
-    public int getSideUp(){
-        return valor;
-    }
-
 
     public void rolarDados(){
-        Dado v = new Dado();
-        for(int x = 0; x < qtd; x++){
-            v.roll();
-            dado[x].setFace(v.getFace());
-        }
+        dado.roll();
     }
 
     public int somaDados(){
-        soma = this.dado[0].getFace() + this.dado[1].getFace();
+        soma = this.dado.getFace() + this.dado.getFace();
         return soma;
     }
 
@@ -41,7 +25,7 @@ public class JogoDado {
             System.out.println( 1 + "º Lancamento: ");
             rolarDados();
             somaDados();
-            System.out.println(dado[0].getFace()+ "e" +dado[1].getFace()+ " = " +this.soma);
+            //System.out.println(dado[0].getFace()+ "e" +dado[1].getFace()+ " = " +this.soma);
             if(soma == 7 || soma ==11){
                 System.out.println("Jogador Ganhou!");
                 break;
@@ -58,6 +42,27 @@ public class JogoDado {
         }
 
     public String toString(){
-        return "A";
+        return dado + " e " + dado;
+    }
+
+    public int regraDoJogo(int valor, int procurar){
+        if(procurar == 0){
+            if(valor == 7 ||valor ==11){
+                return 1;
+            }else if (valor == 2 || valor == 3 || valor == 12){
+                return 2;
+            }else{
+                return 0;
+            }
+        }else if (valor == procurar){
+            return 1;
+        }else{
+            return 0;
+        } 
+    }
+    public void JogoAzar(){
+        System.out.println("[Nova Jogada]");
+        rolarDados();
+        System.out.println(dado);
     }
 }
