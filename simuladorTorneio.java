@@ -8,5 +8,7 @@ public class simuladorTorneio{
         int num = teclado.nextInt();
 
         Torneio campeonato = new Torneio();
+
+        campeonato.iniciarTorneio();
     }
 }

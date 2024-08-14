@@ -1,11 +1,13 @@
 import java.util.Scanner;
 
+// Classe Torneio, para a execucao das rodadas e manipulacao de vetores da classe Jogador.
 public class Torneio{
     Scanner teclado = new Scanner(System.in);
-    private Jogador[] jogadores = new Jogador[10];
-    private int numJogadores;
-    private int numRodadas;
+    private Jogador[] jogadores = new Jogador[10]; // Vetor de 10 jogadores (maximo permitido).
+    private int numJogadores; // Numero de jogadores nesse campeonato.
+    private int numRodadas; // Numero de rodadas.
 
+    // Getters
     public int getRodada(){
         return numRodadas;
     }
@@ -14,6 +16,7 @@ public class Torneio{
         return numJogadores;
     }
 
+    // Setters
     public void setRodada(int nr){
         this.numRodadas = nr;
     }
@@ -22,6 +25,7 @@ public class Torneio{
         this.numJogadores = nj;
     }
 
+    // Realiza a adicao de um jogador
     public void addJogador(){
         System.out.println("Insira o tipo do jogador (0 para humano e 1 para maquina):");
         int tipo = teclado.nextInt();
@@ -31,7 +35,10 @@ public class Torneio{
         setJogadores(num + 1);
     }
     
-    public void iniciarTorneio(){
+    // Inicia o torneio
+    public void iniciarTorneio(int numJog){
+        setJogadores(numJog);
+
         for (int i = 0; i < numJogadores; i++)
             jogadores[i].setSaldo(100);
 
