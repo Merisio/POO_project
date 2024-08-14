@@ -4,7 +4,7 @@ public class Dado{
     Random r = new Random();
 
     public Dado(){
-        
+        this.face = 0;
     }
 
     public void roll(){

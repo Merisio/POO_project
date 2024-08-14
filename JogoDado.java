@@ -2,12 +2,14 @@ public class JogoDado {
     private Dado[] dado;
     private int qtd;
     private int soma;
+    private int jogadas;
 
     public JogoDado(){}
 
     public JogoDado(int q){
         dado = new Dado[q];
         this.qtd = q;
+        this.jogadas =0;
     }
 
     public void rolarDados(){
@@ -27,11 +29,11 @@ public class JogoDado {
     public void jogoAzar(){
         int aux = 0;
 
-        while(soma != aux){
-            System.out.println( 1 + "º Lancamento: ");
+        while(true){
+            System.out.println( (jogadas + 1) + "º Lancamento: ");
             rolarDados();
             somaDados();
-            //System.out.println(dado[0].getFace()+ "e" +dado[1].getFace()+ " = " +this.soma);
+            System.out.println(dado[0].getFace()+ "e" +dado[1].getFace()+ " = " +this.soma);
             if(soma == 7 || soma ==11){
                 System.out.println("Jogador Ganhou!");
                 break;
@@ -39,36 +41,21 @@ public class JogoDado {
                 System.out.println("Jogador Perdeu");
                 break;
             }else{
-                System.out.println("Numero a ser buscado: "+this.soma);
-                    if(soma == aux){
-                        System.out.println("Jogador Ganhou!");
-                    }
+                if(aux == 0){
+                    aux = soma;
+                    System.out.println("Numero a ser buscado: " + aux);
+                }
+                else if(soma == aux){
+                    System.out.println("Jogador Ganhou!");
+                    break;
                 }
             }
+            jogadas++;
         }
+    }
 
     public String toString(){
         return dado[0].getFace() + " e " + dado[1].getFace();
     }
-
-    public int regraDoJogo(int valor, int procurar){
-        if(procurar == 0){
-            if(valor == 7 ||valor ==11){
-                return 1;
-            }else if (valor == 2 || valor == 3 || valor == 12){
-                return 2;
-            }else{
-                return 0;
-            }
-        }else if (valor == procurar){
-            return 1;
-        }else{
-            return 0;
-        } 
-    }
-    public void JogoAzar(){
-        System.out.println("[Nova Jogada]");
-        rolarDados();
-        System.out.println(dado);
-    }
+    
 }
