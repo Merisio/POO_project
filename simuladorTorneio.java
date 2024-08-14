@@ -9,6 +9,6 @@ public class simuladorTorneio{
 
         Torneio campeonato = new Torneio();
 
-        campeonato.iniciarTorneio();
+        campeonato.iniciarTorneio(num);
     }
 }
