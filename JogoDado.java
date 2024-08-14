@@ -1,28 +1,24 @@
 public class JogoDado {
-    private Dado[] dado;
-    private int qtd;
+    private Dado v;
+    private Dado v1;
+    //private int qtd;
     private int soma;
     private int jogadas;
 
-    public JogoDado(){}
-
-    public JogoDado(int q){
-        dado = new Dado[q];
-        this.qtd = q;
+    public JogoDado(){
+        v = new Dado();
+        v1 = new Dado();
+        //this.qtd = q;
         this.jogadas =0;
     }
 
     public void rolarDados(){
-        Dado v = new Dado();
-        for( int i = 0; i < this.qtd; i++){
-            v.roll();
-            System.out.println(v);
-            dado[i].setFace(v.getFace());
-        }
+        v.roll();
+        System.out.println(v);
     }
 
     public int somaDados(){
-        soma = this.dado[0].getFace() + this.dado[1].getFace();
+        soma = this.v.getFace() + this.v1.getFace();
         return soma;
     }
 
@@ -33,7 +29,7 @@ public class JogoDado {
             System.out.println( (jogadas + 1) + "º Lancamento: ");
             rolarDados();
             somaDados();
-            System.out.println(dado[0].getFace()+ "e" +dado[1].getFace()+ " = " +this.soma);
+            System.out.println(v.getFace()+ "e" + v1.getFace()+ " = " +this.soma);
             if(soma == 7 || soma ==11){
                 System.out.println("Jogador Ganhou!");
                 break;
@@ -55,7 +51,7 @@ public class JogoDado {
     }
 
     public String toString(){
-        return dado[0].getFace() + " e " + dado[1].getFace();
+        return v.getFace() + " e " + v1.getFace();
     }
-    
+
 }
