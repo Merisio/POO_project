@@ -14,7 +14,8 @@ public class JogoDado {
 
     public void rolarDados(){
         v.roll();
-        System.out.println(v);
+        v1.roll();
+        //System.out.println(v);
     }
 
     public int somaDados(){
@@ -26,11 +27,11 @@ public class JogoDado {
         int aux = 0;
 
         while(true){
-            System.out.println( (jogadas + 1) + "º Lancamento: ");
+            System.out.println( (jogadas + 1) + "º Lançamento: ");
             rolarDados();
             somaDados();
-            System.out.println(v.getFace()+ "e" + v1.getFace()+ " = " +this.soma);
-            if(soma == 7 || soma ==11){
+            System.out.println(v.getFace()+ " e " + v1.getFace()+ " = " +this.soma);
+            if(aux == 0 && soma == 7 || soma ==11){
                 System.out.println("Jogador Ganhou!");
                 break;
             }else if (soma == 2 || soma == 3 || soma == 12){

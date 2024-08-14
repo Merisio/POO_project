@@ -3,6 +3,6 @@ public class Teste {
         JogoDado dice = new JogoDado();
         dice.jogoAzar();
 
-        System.out.println(dice);
+        //System.out.println(dice);
     }
 }
