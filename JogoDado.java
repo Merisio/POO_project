@@ -51,6 +51,10 @@ public class JogoDado {
         }
     }
 
+    public void porquinho(){
+        
+    }
+
     public String toString(){
         return v.getFace() + " e " + v1.getFace();
     }
