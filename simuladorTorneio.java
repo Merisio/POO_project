@@ -7,8 +7,9 @@ public class simuladorTorneio{
         System.out.println("Insira o número de jogadores:");
         int num = teclado.nextInt();
 
-        Torneio campeonato = new Torneio();
-
-        campeonato.iniciarTorneio(num);
+        if (num >= 2){
+            Torneio campeonato = new Torneio();
+            campeonato.iniciarTorneio(num);
+        }
     }
 }
