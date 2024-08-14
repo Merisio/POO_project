@@ -1,4 +1,5 @@
 import java.util.Random;
+
 public class Dado{
     public int face;
     Random r = new Random();

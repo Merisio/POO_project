@@ -4,7 +4,7 @@ public class simuladorTorneio{
     public static void main(String[] args){
         Scanner teclado = new Scanner(System.in);
 
-        System.out.println("Insira o número de jogadores:");
+        System.out.println("Insira o numero de jogadores: ");
         int num = teclado.nextInt();
 
         if (num >= 2){

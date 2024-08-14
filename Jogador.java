@@ -1,13 +1,11 @@
-import java.util.Scanner;
-
 public class Jogador{
     private JogoDado jogo = new JogoDado();
     private int id;
     private int tipo;
     private double saldo;
     private double valorDeAposta;
-    private int instancia;
 
+    // Construtores.
     public Jogador(int tipo){
         this.tipo = tipo;
     }
@@ -16,6 +14,8 @@ public class Jogador{
         this.id = id;
         this.saldo = sl;
     }
+
+    // Setters.
     public void setId(int d){
         this.id = d;
     }
@@ -28,8 +28,10 @@ public class Jogador{
     public void setAposta(double v){
         this.valorDeAposta = v;
     }
+
+    // Getters.
     public int getId(){
-        return id;
+        return this.id;
     }
     public int getTipo(){
         return this.tipo;
@@ -40,12 +42,16 @@ public class Jogador{
     public double getValorDeAposta(){
         return this.valorDeAposta;
     }
-    public void Apostar(double valor){
-        this.valorDeAposta = valor;
-    }
 
-    public int resultado(){
+    // Resultado do Jogo de Azar.
+    public int resultadoAzar(){
         jogo.jogoAzar();
         return jogo.getResult();
     }
+
+    // Resultado do Jogo Porquinho.
+    /*public int resultadoPorc(){
+        return ;
+
+    }*/
 }
