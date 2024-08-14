@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class Jogador{
+    private JogoDado jogo = new JogoDado();
     private int id;
     private int tipo;
     private double saldo;
@@ -10,9 +11,10 @@ public class Jogador{
     public Jogador(int tipo){
         this.tipo = tipo;
     }
-    public Jogador(int tipo, int id){
+    public Jogador(int tipo, int id, double sl){
         this.tipo = tipo;
         this.id = id;
+        this.saldo = sl;
     }
     public void setId(int d){
         this.id = d;
@@ -41,7 +43,9 @@ public class Jogador{
     public void Apostar(double valor){
         this.valorDeAposta = valor;
     }
-    public void jogarDados(){
 
+    public int resultado(){
+        jogo.jogoAzar();
+        return jogo.getResult();
     }
 }
