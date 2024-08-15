@@ -51,10 +51,10 @@ public class Jogador{
     }
 
     // Resultado do Jogo Porquinho.
-    /*public int resultadoPorc(){
+    public int resultadoPorc(){
         jogo = new JogoDado(2);
         jogo.aplicaPorquinho();
-        return ;
+        return jogo.getResult();
 
-    }*/
+    }
 }

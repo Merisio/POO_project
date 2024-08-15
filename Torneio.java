@@ -121,6 +121,10 @@ public class Torneio{
 
                 break;
             case 3:
+                for(int i =0 ; i < numJogadores; i++){
+                    int resultado2 = jogadores[i].resultadoPorc();
+                    System.out.println("Resultado: " +resultado2);
+                }
             
                 break;
             case 4:

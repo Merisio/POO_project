@@ -4,6 +4,7 @@ public class JogoDado {
     private int soma;
     private int jogadas;
     private int result;
+    private int mult;
 
     // Construtores.
     public JogoDado(int q){
@@ -32,9 +33,11 @@ public class JogoDado {
     }
 
     // Soma os dois valores dos dados.
-    public int somaDados(){
-        soma = this.dado[0].getFace() + this.dado[1].getFace();
-        return soma;
+    public void somaDados(){
+        this.soma = this.dado[0].getFace() + this.dado[1].getFace();
+    }
+    public void multiplicaDados(){
+        this.mult = this.dado[0].getFace() * this.dado[1].getFace();
     }
 
     // Realiza o Jogo de Azar
@@ -82,7 +85,26 @@ public class JogoDado {
     public void aplicaPorquinho(){
         int pontos =0;
         while(pontos<300){
-
+            System.out.println( (jogadas) + "º Lançamento: ");
+            // Rola e soma os dados.
+            rolarDados();
+            multiplicaDados();
+            // Mostra na tela os valores encontrados no dado.
+            
+            System.out.println(dado[0].getFace()+ " e " + dado[1].getFace()+ " = " +this.mult); 
+            pontos += this.mult;
+            System.out.println("Pontuação: "+pontos);
+            
+            if(dado[0].getFace() == 1 && dado[1].getFace() == 1){
+                pontos += 30;
+            }
+            else if(dado[0].getFace() == dado[1].getFace()){
+                pontos += (this.mult *2);
+            }
+            jogadas++;
+            if(pontos > 300){
+                setResult(jogadas);
+            }
         }
     }
 
