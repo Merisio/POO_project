@@ -59,7 +59,7 @@ public class Torneio{
                     if(jogadores[i].getTipo() == 0){
                     // Verifica se o jogador eh do tipo humano, solicitando que o jogador 
                     // insira o valor de aposta desejado caso verdadeiro.
-                        System.out.println("Saldo Do jogador "+(i+1)+": " +jogadores[i].getSaldo()+". Insira o valor da aposta: ");
+                        System.out.println("Saldo Do jogador "+(i+1)+": R$" +jogadores[i].getSaldo()+". Insira o valor da aposta: ");
                         double aposta = teclado.nextDouble();
 
                         if(aposta <= jogadores[i].getSaldo()){ // Verificacao para que o jogador nao 
@@ -77,8 +77,6 @@ public class Torneio{
                         else
                             break;
                     }
-                /* } // Gui, acho que podemos tirar esse for, e deixar tudo em um so.
-                for(int i = 0; i< numJogadores; i++){*/
                     if(jogadores[i].getSaldo() > 0){ // Verifica se o saldo do jogador eh maior do que 0, 
                                                      // para que o jogador possa apostar.
 
