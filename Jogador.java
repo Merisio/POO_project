@@ -1,5 +1,5 @@
 public class Jogador{
-    private JogoDado jogo = new JogoDado();
+    private JogoDado jogo;
     private int id;
     private int tipo;
     private double saldo;
@@ -45,12 +45,15 @@ public class Jogador{
 
     // Resultado do Jogo de Azar.
     public int resultadoAzar(){
-        jogo.jogoAzar();
+        jogo = new JogoDado(2);
+        jogo.aplicaRegraAzar();
         return jogo.getResult();
     }
 
     // Resultado do Jogo Porquinho.
     /*public int resultadoPorc(){
+        jogo = new JogoDado(2);
+        jogo.aplicaPorquinho();
         return ;
 
     }*/

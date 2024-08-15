@@ -1,17 +1,17 @@
 public class JogoDado {
-    private Dado v;
-    private Dado v1;
-    //private int qtd;
+    private Dado[] dado = new Dado[2];
+    private int qtd;
     private int soma;
     private int jogadas;
     private int result;
 
     // Construtores.
-    public JogoDado(){
-        v = new Dado();
-        v1 = new Dado();
-        //this.qtd = q;
+    public JogoDado(int q){
+        this.qtd = q;
         this.jogadas =0;
+        for(int i =0; i < qtd; i++){
+            dado[i] = new Dado();
+        }
     }
 
     // Setter e Getter do Resultado.
@@ -24,19 +24,21 @@ public class JogoDado {
 
     // Rola os dados do Jogo de Azar.
     public void rolarDados(){
-        v.roll();
-        v1.roll();
+        for(int i =0; i < qtd; i++){
+            dado[i].roll();
+        }
+        
         //System.out.println(v);
     }
 
     // Soma os dois valores dos dados.
     public int somaDados(){
-        soma = this.v.getFace() + this.v1.getFace();
+        soma = this.dado[0].getFace() + this.dado[1].getFace();
         return soma;
     }
 
     // Realiza o Jogo de Azar
-    public void jogoAzar(){
+    public void aplicaRegraAzar(){
         int aux = 0;
         jogadas = 1;
 
@@ -47,7 +49,7 @@ public class JogoDado {
             rolarDados();
             somaDados();
             // Mostra na tela os valores encontrados no dado.
-            System.out.println(v.getFace()+ " e " + v1.getFace()+ " = " +this.soma); 
+            System.out.println(dado[0].getFace()+ " e " + dado[1].getFace()+ " = " +this.soma); 
             
             // Jogador ganha imediatamente se encontrar algum desses 3 valores.
             if(aux == 0 && soma == 7 || soma == 11){
@@ -77,12 +79,15 @@ public class JogoDado {
         }
     }
 
-    public void porquinho(){
-        
+    public void aplicaPorquinho(){
+        int pontos =0;
+        while(pontos<300){
+
+        }
     }
 
     public String toString(){
-        return v.getFace() + " e " + v1.getFace();
+        return dado[0].getFace() + " e " + dado[1].getFace();
     }
 
 }
