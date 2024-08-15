@@ -6,6 +6,7 @@ public class Torneio{
     private Jogador[] jogadores = new Jogador[10]; // Vetor de 10 jogadores (maximo permitido).
     private int numJogadores; // Numero de jogadores nesse campeonato.
     private int numRodadas; // Numero de rodadas.
+    private int[] vencedores = new int[10];
 
     // Getters
     public int getRodada(){
@@ -24,7 +25,7 @@ public class Torneio{
     }
     public void setVetor(){// Inicializa todo o vetor com 0.
         for(int i = 0; i < 10; i++)
-            jogadores[i] = new Jogador(0, 0, 0.0);
+            jogadores[i] = new Jogador(0, 0, 0);
     }
 
     // Realiza a adicao dos jogadores
@@ -54,49 +55,67 @@ public class Torneio{
 
         switch(opcao){
             case 1:
-            while(opcao != 3){ // Repeticao para definir o numero de rodadas, ate que reste apenas um vencedor.
-                for(int i = 0; i< numJogadores; i++){// Repeticao para operar com o vetor de jogadores.
-                    if(jogadores[i].getTipo() == 0){
-                    // Verifica se o jogador eh do tipo humano, solicitando que o jogador 
-                    // insira o valor de aposta desejado caso verdadeiro.
-                        System.out.println("Saldo Do jogador "+(i+1)+": R$" +jogadores[i].getSaldo()+". Insira o valor da aposta: ");
-                        double aposta = teclado.nextDouble();
+                while(opcao != 3){ // Repeticao para definir o numero de rodadas, ate que reste apenas um vencedor.
+                    int contVen = 0;
+                    int premio = 0;
 
-                        if(aposta <= jogadores[i].getSaldo()){ // Verificacao para que o jogador nao 
-                            jogadores[i].setAposta(aposta);    // aposte mais do que tem em seu saldo.
+                    for(int i = 0; i < numJogadores; i++){// Repeticao para operar com o vetor de jogadores.
+                        if(jogadores[i].getTipo() == 0){
+                        // Verifica se o jogador eh do tipo humano, solicitando que o jogador 
+                        // insira o valor de aposta desejado caso verdadeiro.
+                            System.out.println("Saldo Do jogador "+(i+1)+": " +jogadores[i].getSaldo()+" moedas. Insira o valor da aposta: ");
+                            int aposta = teclado.nextInt();
+
+                            if(aposta <= jogadores[i].getSaldo()){ // Verificacao para que o jogador nao 
+                                jogadores[i].setAposta(aposta);    // aposte mais do que tem em seu saldo.
+                                premio += aposta;
+                            }
+                            else
+                                System.out.println("Aposta Invalida. Saldo Insuficiente.");
                         }
-                        else
-                            System.out.println("Aposta Invalida. Saldo Insuficiente.");
-                    }
-                    else{// Caso o jogador seja uma maquina, possui uma aposta predefinida.
-                        System.out.println("Saldo Do jogador "+(i+1)+": "+jogadores[i].getSaldo());
-                        if(jogadores[i].getSaldo() > 5){// Verificacao com o numero 5 para nao lidar com numeros decimais muito proximos de 0.
-                            double aposta = (jogadores[i].getSaldo() / 5);
-                            jogadores[i].setAposta(aposta);
+                        else{// Caso o jogador seja uma maquina, possui uma aposta predefinida.
+                            System.out.println("Saldo Do jogador "+(i+1)+": "+jogadores[i].getSaldo()+ "moedas.");
+                            if(jogadores[i].getSaldo() > 5){// Verificacao com o numero 5 para nao lidar com numeros decimais muito proximos de 0.
+                                int aposta = (jogadores[i].getSaldo() / 5);
+                                jogadores[i].setAposta(aposta);
+                                premio += aposta;
+                            }
+                            else
+                                break;
                         }
-                        else
-                            break;
                     }
-                    if(jogadores[i].getSaldo() > 0){ // Verifica se o saldo do jogador eh maior do que 0, 
-                                                     // para que o jogador possa apostar.
+                    for(int i = 0; i < numJogadores; i++){
+                        if(jogadores[i].getSaldo() > 0){ // Verifica se o saldo do jogador eh maior do que 0, 
+                                                        // para que o jogador possa apostar.
+                            int r = jogadores[i].resultadoAzar();
+                            // Chama a funcao resultado, que retorna um booleano mostrando se o
+                            // jogador perdeu ou ganhou, alem de executar a rodada do Jogo de Azar.
 
-                        int r = jogadores[i].resultadoAzar();
-                        // Chama a funcao resultado, que retorna um booleano mostrando se o
-                        // jogador perdeu ou ganhou, alem de executar a rodada do Jogo de Azar.
+                            if(r == 0){ // Verifica se o jogador perdeu.
+                                vencedores[i] = 0; // Identifica como 0 quem perdeu e como 1 quem ganhou.
+                            }
+                            else{
+                                contVen++; //Incrementa o contador de vencedores.
+                                vencedores[i] = 1;
+                            }
+                            
+                        }
+                        // Teste para as rodadas.
+                        if(jogadores[i].getSaldo() == 0)
+                            opcao = 3;
+                    }
 
-                        if(r == 0) // Verifica se o jogador perdeu.
-                            // Se o jogador perdeu, o valor de aposta eh descontado de seu saldo.
+                    for(int i = 0; i < numJogadores; i++){
+                        if (vencedores[i] == 1){
+                            System.out.println("O jogador "+(i + 1)+" venceu.");
+                            jogadores[i].setSaldo(jogadores[i].getSaldo() + (int)premio/contVen);
+                        }
+                        else{
+                            System.out.println("O jogador "+ (i+1)+ " perdeu.");
                             jogadores[i].setSaldo(jogadores[i].getSaldo() - jogadores[i].getValorDeAposta());
-                        else
-                            // Se ganhou, o valor de aposta eh adicionado ao seu saldo.
-                            jogadores[i].setSaldo(jogadores[i].getSaldo() + jogadores[i].getValorDeAposta());
-                        
+                        }
                     }
-                    // Teste para as rodadas.
-                    if(jogadores[i].getSaldo() == 0)
-                        opcao = 3;
                 }
-            }
                 break;
             case 2:
 

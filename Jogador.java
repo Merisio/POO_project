@@ -2,14 +2,14 @@ public class Jogador{
     private JogoDado jogo;
     private int id;
     private int tipo;
-    private double saldo;
-    private double valorDeAposta;
+    private int saldo;
+    private int valorDeAposta;
 
     // Construtores.
     public Jogador(int tipo){
         this.tipo = tipo;
     }
-    public Jogador(int tipo, int id, double sl){
+    public Jogador(int tipo, int id, int sl){
         this.tipo = tipo;
         this.id = id;
         this.saldo = sl;
@@ -22,10 +22,10 @@ public class Jogador{
     public void setTipo(int t){
         this.tipo = t;
     }
-    public void setSaldo(double s){
+    public void setSaldo(int s){
         this.saldo = s;
     }
-    public void setAposta(double v){
+    public void setAposta(int v){
         this.valorDeAposta = v;
     }
 
@@ -36,10 +36,10 @@ public class Jogador{
     public int getTipo(){
         return this.tipo;
     }
-    public double getSaldo(){
+    public int getSaldo(){
         return this.saldo;
     }
-    public double getValorDeAposta(){
+    public int getValorDeAposta(){
         return this.valorDeAposta;
     }
 
