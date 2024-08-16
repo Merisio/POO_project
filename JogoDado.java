@@ -95,13 +95,14 @@ public class JogoDado {
             pontos += this.mult;
             System.out.println("Pontuação: "+pontos);
             
-            if(dado[0].getFace() == 1 && dado[1].getFace() == 1){
+            if(this.mult == 1){
                 pontos += 30;
             }
             else if(dado[0].getFace() == dado[1].getFace()){
                 pontos += (this.mult *2);
             }
             jogadas++;
+            System.out.println("Pontuação: "+pontos);
             if(pontos > 300){
                 setResult(jogadas);
             }
