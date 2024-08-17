@@ -69,7 +69,7 @@ public class Torneio{
     public void premiacao(int cont){
         for(int i = 0; i < numJogadores; i++){
             if (vencedores[i] == 1){
-                System.out.println("O jogador "+(i + 1)+" venceu.");
+                System.out.println("==> O jogador "+(i + 1)+" venceu. <==");
                 if(cont > 0){
                     jogadores[i].setSaldo((jogadores[i].getSaldo() + (int)premio/cont) -jogadores[i].getValorDeAposta());
                 }else{
@@ -77,7 +77,7 @@ public class Torneio{
                     vencedores[i]= 0;
                 }
             }else{
-                System.out.println("O jogador "+ (i+1)+ " perdeu.");
+                System.out.println("== O jogador "+ (i+1)+ " perdeu. ==");
                 jogadores[i].setSaldo(jogadores[i].getSaldo() - jogadores[i].getValorDeAposta());
             }
         }
@@ -86,6 +86,7 @@ public class Torneio{
     // Inicia o torneio
     public void iniciarTorneio(int numJog){
         int opcao =0;
+        int rodadas=5;
         //while(opcao !=4){
             setJogadores(numJog); // Define o numero maximo de jogadores com os dados passados pelo operador.
             addJogadores();// Define o Id, o Saldo e o Tipo de cada jogador.
@@ -100,16 +101,18 @@ public class Torneio{
 
         switch(opcao){
             case 1:
-                while(opcao != 3){ // Repeticao para definir o numero de rodadas, ate que reste apenas um vencedor.
+                while(rodadas < 10){ // Repeticao para definir o numero de rodadas, ate que reste apenas um vencedor.
                     int contVen = 0;
                     apostar();
                     for(int i = 0; i < numJogadores; i++){
                         if(jogadores[i].getSaldo() > 0){ // Verifica se o saldo do jogador eh maior do que 0, 
                                                         // para que o jogador possa apostar.
+                            System.out.println("----------------------------------");
+                            System.out.println("Jogador "+ (i+1));
+                            System.out.println("----------------------------------");
                             int r = jogadores[i].resultadoAzar();
                             // Chama a funcao resultado, que retorna um booleano mostrando se o
                             // jogador perdeu ou ganhou, alem de executar a rodada do Jogo de Azar.
-
                             if(r == 0){ // Verifica se o jogador perdeu.
                                 vencedores[i] = 0; // Identifica como 0 quem perdeu e como 1 quem ganhou.
                             }else{
@@ -121,8 +124,10 @@ public class Torneio{
                         if(jogadores[i].getSaldo() == 0)
                             opcao = 3;
                     }
+                    System.out.println(" ");
                     premiacao(contVen);
                     premio=0;
+                    rodadas++;
                 }
                 break;
             case 2:
@@ -130,7 +135,7 @@ public class Torneio{
 
                 break;
             case 3:
-                while(opcao !=5){
+                while(rodadas < 10){
                     int menor =0;
                     apostar();
                     for (int i = 0 ; i < numJogadores; i++){
@@ -159,7 +164,9 @@ public class Torneio{
                         System.out.println("Ganhador - Jogador "+ganhador);
                         vencedores[ganhador-1] = 1;
                     }
+                    System.out.println("");
                     premiacao(0);
+                    rodadas++;
                 }
                 break;
             case 4:

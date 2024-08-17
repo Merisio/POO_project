@@ -52,17 +52,17 @@ public class JogoDado {
             rolarDados();
             somaDados();
             // Mostra na tela os valores encontrados no dado.
-            System.out.println(dado[0].getFace()+ " e " + dado[1].getFace()+ " = " +this.soma); 
+            System.out.println("    "+dado[0].getFace()+ " e " + dado[1].getFace()+ " = " +this.soma); 
             
             // Jogador ganha imediatamente se encontrar algum desses 3 valores.
             if(aux == 0 && soma == 7 || soma == 11){
-                System.out.println("Jogador Ganhou!");
+                System.out.println("--> Jogador Ganhou!");
                 setResult(1);
                 break;
             }
             // Jogador perde imediatamente se encontrar algum desses 3 valores.
             else if(soma == 2 || soma == 3 || soma == 12){
-                System.out.println("Jogador Perdeu");
+                System.out.println("--> Jogador Perdeu");
                 setResult(0);
                 break;
             }
@@ -70,10 +70,10 @@ public class JogoDado {
             else{
                 if(aux == 0){
                     aux = soma;
-                    System.out.println("Numero a ser buscado: " + aux);
+                    System.out.println("**Numero a ser buscado: " + aux);
                 }
                 else if(soma == aux){
-                    System.out.println("Jogador Ganhou!");
+                    System.out.println("--> Jogador Ganhou!");
                     setResult(1);
                     break;
                 }
