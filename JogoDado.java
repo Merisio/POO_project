@@ -85,24 +85,26 @@ public class JogoDado {
     public void aplicaPorquinho(){
         int pontos =0;
         while(pontos<300){
-            System.out.println( (jogadas) + "º Lançamento: ");
+            jogadas++;
+            System.out.println( (jogadas + "º Lançamento: "));
             // Rola e soma os dados.
             rolarDados();
             multiplicaDados();
             // Mostra na tela os valores encontrados no dado.
             
-            System.out.println(dado[0].getFace()+ " e " + dado[1].getFace()+ " = " +this.mult); 
+            System.out.println(dado[0].getFace()+ " e " + dado[1].getFace()+ " = " +this.mult);
             pontos += this.mult;
-            System.out.println("Pontuação: "+pontos);
             
             if(this.mult == 1){
                 pontos += 30;
+                System.out.println("*Doble de Ás*");
             }
             else if(dado[0].getFace() == dado[1].getFace()){
                 pontos += (this.mult *2);
+                System.out.println("*Doble*");
             }
-            jogadas++;
-            System.out.println("Pontuação: "+pontos);
+            System.out.println("--> Pontuação: "+pontos);
+            System.out.println("");
             if(pontos > 300){
                 setResult(jogadas);
             }
