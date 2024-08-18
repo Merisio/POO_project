@@ -78,13 +78,13 @@ public class Torneio{
     }
 
     // Premia os vencedores da rodada, e desconta daqueles que perderam.
-    public void premiacao(int cont){
+    public void premiacao(int aux){
         for(int i = 0; i < numJogadores; i++){
             if (vencedores[i] == 1){ // Indica que o jogador "i" venceu.
-                System.out.println("==> O jogador "+(i + 1)+" venceu. <==");
+                System.out.println("==> O jogador "+(i + 1)+" venceu a rodada. <==");
                 // Utiliza o contador para verificar quantos jogadores venceram e premiar de forma igual.
-                if(cont > 0){
-                    jogadores[i].setSaldo((jogadores[i].getSaldo() + (int)premio/cont) - jogadores[i].getValorDeAposta());
+                if(aux > 0){
+                    jogadores[i].setSaldo((jogadores[i].getSaldo() + (int)premio/aux) - jogadores[i].getValorDeAposta());
                 }
                 else{
                     jogadores[i].setSaldo(jogadores[i].getSaldo() + ((int)premio-jogadores[i].getValorDeAposta()));
@@ -92,9 +92,13 @@ public class Torneio{
                 }
             }
             else{// jogador "i" perdeu.
-                System.out.println("== O jogador "+ (i+1)+ " perdeu. ==");
+                System.out.println("== O jogador "+ (i+1)+ " perdeu a rodada. ==");
                 // Desconta o valor apostado.
-                jogadores[i].setSaldo(jogadores[i].getSaldo() - jogadores[i].getValorDeAposta());
+                if(jogadores[i].getSaldo() > 0){
+                    jogadores[i].setSaldo(jogadores[i].getSaldo() - jogadores[i].getValorDeAposta());
+                }else{
+                    System.out.println("Jogador eliminado.");
+                }
             }
         }
     }
@@ -121,6 +125,7 @@ public class Torneio{
                 }
             }else{
                 cont++;
+                i++;
             }   
             // Teste para as rodadas.
                 //if(jogadores[i].getSaldo() == 0)
@@ -129,7 +134,6 @@ public class Torneio{
         System.out.println(" ");
         premiacao(contVen);
         premio = 0;
-
     }
 
     public int JogoPorquinho(int rodadas){
