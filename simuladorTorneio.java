@@ -10,6 +10,7 @@ public class simuladorTorneio{
         if (num >= 2){
             Torneio campeonato = new Torneio();
             campeonato.iniciarTorneio(num);
+            campeonato.mostrarPlacarFinal();
         }
     }
 }
