@@ -188,6 +188,7 @@ public class Torneio{
         switch(opcao){
             case 1:
                 while(rodadas < 10) // Repeticao para definir o numero de rodadas, ate que reste apenas um vencedor.
+                    rodadas = Azar(rodadas);
                 break;
             case 2:
                 while(rodadas < 10)
@@ -203,7 +204,7 @@ public class Torneio{
     }
 
     public void mostrarPlacarFinal(){
-        int winner;
+        int winner = 0;
 
         for (int i = 0; i < numJogadores; i++){
             System.out.println("Saldo do jogador "+(i+1)+": "+(jogadores[i].getSaldo()));
@@ -211,7 +212,7 @@ public class Torneio{
             if (jogadores[i].getSaldo() > 0)
                 winner = i + 1;
         }
-        System.out.println("O vencedor foi o jogador "+(winner)+".");
+        System.out.println("O vencedor foi o jogador "+winner+".");
     }
 }
 
