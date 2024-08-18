@@ -7,7 +7,7 @@ public class Torneio{
     private int numJogadores; // Numero de jogadores nesse campeonato.
     private int numRodadas; // Numero de rodadas.
     private int[] vencedores = new int[10]; // Vetor de verificacao para ver qual jogador perdeu e qual ganhou a rodada.
-    private int ganhador, cont =0, premio = 0; // Acumula os valores de aposta de todos os jogadores na variavel premio.
+    private int ganhador, aux =0, premio = 0; // Acumula os valores de aposta de todos os jogadores na variavel premio.
 
     // Getters
     public int getRodada(){
@@ -65,7 +65,7 @@ public class Torneio{
                 if (jogadores[i].getSaldo() == 0)
                     System.out.println("Jogador "+ (i+1)+ " nao possui mais moedas, e foi eliminado.");
                 else{
-                    System.out.println("Saldo Do jogador "+(i+1)+": "+jogadores[i].getSaldo()+ "moedas.");
+                    System.out.println("Saldo Do jogador "+(i+1)+": "+jogadores[i].getSaldo()+ " moedas.");
 
                     if(jogadores[i].getSaldo() >= 5){// Verificacao com o numero 5 para nao lidar com numeros decimais muito proximos de 0.
                         int aposta = ((int)(jogadores[i].getSaldo() / 5));
@@ -85,10 +85,10 @@ public class Torneio{
                     System.out.println("==> O jogador "+(i + 1)+" venceu a rodada. <==");
                     // Utiliza o contador para verificar quantos jogadores venceram e premiar de forma igual.
                     if(aux > 0){
-                        jogadores[i].setSaldo((jogadores[i].getSaldo() + (int)premio/aux) - jogadores[i].getValorDeAposta());
+                        jogadores[i].setSaldo((jogadores[i].getSaldo() + premio/aux) - jogadores[i].getValorDeAposta());
                     }
                     else{
-                        jogadores[i].setSaldo(jogadores[i].getSaldo() + ((int)premio-jogadores[i].getValorDeAposta()));
+                        jogadores[i].setSaldo(jogadores[i].getSaldo() + (premio-jogadores[i].getValorDeAposta()));
                         vencedores[i]= 0;
                     }
                 }   
@@ -107,8 +107,6 @@ public class Torneio{
 
         for(int i = 0; i < numJogadores; i++){
             if(jogadores[i].getSaldo() <= 0){
-                cont++;
-                System.out.println("CONTADOR -----> "+ cont);
             }else{ // Verifica se o saldo do jogador eh maior do que 0, 
                                             // para que o jogador possa apostar.
                 System.out.println("----------------------------------");
@@ -135,7 +133,7 @@ public class Torneio{
         premio = 0;
     }
 
-    public int JogoPorquinho(int rodadas){
+    public void JogoPorquinho(){
         int menor = 0;
         apostar();
 
@@ -168,15 +166,11 @@ public class Torneio{
         }
         System.out.println("");
         premiacao(0);
-        rodadas++;
-
-        return rodadas;
     }
 
     // Inicia o torneio
     public void iniciarTorneio(int numJog){
         int opcao = 0;
-        int rodadas = 1;
         //while(opcao !=4){
         setJogadores(numJog); // Define o numero maximo de jogadores com os dados passados pelo operador.
         addJogadores();// Define o Id, o Saldo e o Tipo de cada jogador.
@@ -190,15 +184,33 @@ public class Torneio{
 
         switch(opcao){
             case 1:
-                do{ // Repeticao para definir o numero de rodadas, ate que reste apenas um vencedor.
-                    Azar();
-                }while(cont < (numJogadores-1));
-                cont = 0;
+               do{ // Repeticao para definir o numero de rodadas, ate que reste apenas um vencedor.
+                   Azar();
+                   int cont = 0;
+                   for (int i = 0; i < numJogadores; i++){
+                       if (jogadores[i].getSaldo() <= 0){
+                           cont++;
+                       }
+                   }
+                   if (cont == numJogadores-1){
+                       break;
+                   }
+               }while(aux != 1);
                 break;
             case 2:
-                while(cont < numJog);
-                    rodadas = JogoPorquinho(rodadas);
-                break;
+                do{ // Repeticao para definir o numero de rodadas, ate que reste apenas um vencedor.
+                    JogoPorquinho();
+                    int cont = 0;
+                    for (int i = 0; i < numJogadores; i++){
+                        if (jogadores[i].getSaldo() <= 0){
+                            cont++;
+                        }
+                    }
+                    if (cont == numJogadores-1){
+                        break;
+                    }
+                }while(aux != 1);
+                break;                
             case 3:
                 System.out.println("Saindo...");
                 break;
