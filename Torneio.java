@@ -7,7 +7,7 @@ public class Torneio{
     private int numJogadores; // Numero de jogadores nesse campeonato.
     private int numRodadas; // Numero de rodadas.
     private int[] vencedores = new int[10]; // Vetor de verificacao para ver qual jogador perdeu e qual ganhou a rodada.
-    private int ganhador, premio = 0; // Acumula os valores de aposta de todos os jogadores na variavel premio.
+    private int ganhador, cont =0, premio = 0; // Acumula os valores de aposta de todos os jogadores na variavel premio.
 
     // Getters
     public int getRodada(){
@@ -63,7 +63,7 @@ public class Torneio{
             }
             else{// Caso o jogador seja uma maquina, possui uma aposta predefinida.
                 if (jogadores[i].getSaldo() == 0)
-                    System.out.println("O jogador "+(i+1)+" nao possui mais moedas.");
+                    System.out.println("Jogador "+ (i+1)+ " nao possui mais moedas, e foi eliminado.");
                 else{
                     System.out.println("Saldo Do jogador "+(i+1)+": "+jogadores[i].getSaldo()+ "moedas.");
 
@@ -99,7 +99,7 @@ public class Torneio{
         }
     }
 
-    public int Azar(int rodadas){
+    public void Azar(){
         int contVen = 0;
         apostar();
 
@@ -119,7 +119,9 @@ public class Torneio{
                     contVen++; //Incrementa o contador de vencedores.
                     vencedores[i] = 1;
                 }
-            }
+            }else{
+                cont++;
+            }   
             // Teste para as rodadas.
                 //if(jogadores[i].getSaldo() == 0)
                     //opcao = 3;
@@ -127,9 +129,7 @@ public class Torneio{
         System.out.println(" ");
         premiacao(contVen);
         premio = 0;
-        rodadas++;
 
-        return rodadas;
     }
 
     public int JogoPorquinho(int rodadas){
@@ -187,11 +187,13 @@ public class Torneio{
 
         switch(opcao){
             case 1:
-                while(rodadas < 10) // Repeticao para definir o numero de rodadas, ate que reste apenas um vencedor.
-                    rodadas = Azar(rodadas);
+                do{ // Repeticao para definir o numero de rodadas, ate que reste apenas um vencedor.
+                    Azar();
+                }while(cont < (numJogadores-1));
+                cont = 0;
                 break;
             case 2:
-                while(rodadas < 10)
+                while(cont < numJog);
                     rodadas = JogoPorquinho(rodadas);
                 break;
             case 3:
