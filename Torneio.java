@@ -80,25 +80,23 @@ public class Torneio{
     // Premia os vencedores da rodada, e desconta daqueles que perderam.
     public void premiacao(int aux){
         for(int i = 0; i < numJogadores; i++){
-            if (vencedores[i] == 1){ // Indica que o jogador "i" venceu.
-                System.out.println("==> O jogador "+(i + 1)+" venceu a rodada. <==");
-                // Utiliza o contador para verificar quantos jogadores venceram e premiar de forma igual.
-                if(aux > 0){
-                    jogadores[i].setSaldo((jogadores[i].getSaldo() + (int)premio/aux) - jogadores[i].getValorDeAposta());
-                }
-                else{
-                    jogadores[i].setSaldo(jogadores[i].getSaldo() + ((int)premio-jogadores[i].getValorDeAposta()));
-                    vencedores[i]= 0;
-                }
-            }
-            else{// jogador "i" perdeu.
-                System.out.println("== O jogador "+ (i+1)+ " perdeu a rodada. ==");
-                // Desconta o valor apostado.
-                if(jogadores[i].getSaldo() > 0){
+            if(jogadores[i].getSaldo()> 0){
+                if (vencedores[i] == 1){ // Indica que o jogador "i" venceu.
+                    System.out.println("==> O jogador "+(i + 1)+" venceu a rodada. <==");
+                    // Utiliza o contador para verificar quantos jogadores venceram e premiar de forma igual.
+                    if(aux > 0){
+                        jogadores[i].setSaldo((jogadores[i].getSaldo() + (int)premio/aux) - jogadores[i].getValorDeAposta());
+                    }
+                    else{
+                        jogadores[i].setSaldo(jogadores[i].getSaldo() + ((int)premio-jogadores[i].getValorDeAposta()));
+                        vencedores[i]= 0;
+                    }
+                }   
+                else{// jogador "i" perdeu.
+                    System.out.println("== O jogador "+ (i+1)+ " perdeu a rodada. ==");
+                    // Desconta o valor apostado.
                     jogadores[i].setSaldo(jogadores[i].getSaldo() - jogadores[i].getValorDeAposta());
-                }else{
-                    System.out.println("Jogador eliminado.");
-                }
+                    }
             }
         }
     }
@@ -108,7 +106,10 @@ public class Torneio{
         apostar();
 
         for(int i = 0; i < numJogadores; i++){
-            if(jogadores[i].getSaldo() > 0){ // Verifica se o saldo do jogador eh maior do que 0, 
+            if(jogadores[i].getSaldo() <= 0){
+                cont++;
+                System.out.println("CONTADOR -----> "+ cont);
+            }else{ // Verifica se o saldo do jogador eh maior do que 0, 
                                             // para que o jogador possa apostar.
                 System.out.println("----------------------------------");
                 System.out.println("Jogador "+ (i+1));
@@ -118,14 +119,12 @@ public class Torneio{
                 // jogador perdeu ou ganhou, alem de executar a rodada do Jogo de Azar.
                 if(r == 0){ // Verifica se o jogador perdeu.
                     vencedores[i] = 0; // Identifica como 0 quem perdeu e como 1 quem ganhou.
+                    jogadores[i].setSaldo(jogadores[i].getSaldo() - jogadores[i].getValorDeAposta());
                 }
                 else{
                     contVen++; //Incrementa o contador de vencedores.
                     vencedores[i] = 1;
                 }
-            }else{
-                cont++;
-                i++;
             }   
             // Teste para as rodadas.
                 //if(jogadores[i].getSaldo() == 0)
