@@ -3,20 +3,24 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.Scanner;
 import java.io.File;
+import java.util.Scanner;
 
 public class simuladorTorneio implements Serializable{
+
+    public static final Scanner teclado = new Scanner(System.in);
+    public static void main(String[] args){
         System.out.println("Insira o numero de jogadores: ");
         int num = teclado.nextInt();
 
         if (num >= 2){
             Torneio campeonato = new Torneio();
-            System.out.println("1) Começar novo Campeonato.");
+            System.out.println("==== MENU INICIAL ====");
+            System.out.println("1) Comecar novo Campeonato.");
             System.out.println("2) Ver placar.");
             System.out.println("3) Salvar Campeonato.");
-            System.out.println("3) Carregar Campeonato.");
-            System.out.println("4) Sair.");
+            System.out.println("4) Carregar Campeonato.");
+            System.out.println("5) Sair.");
             System.out.println("Selecione o que deseja:");
             int opcao = teclado.nextInt();
 
@@ -28,10 +32,13 @@ public class simuladorTorneio implements Serializable{
                     campeonato.mostrarPlacarFinal();
                     break;
                 case 3:
-                    salvarTorneio();
+                    gravar_arquivo();
                     break;
                 case 4: 
-                    carregarTorneio();
+                    ler_arquivo();
+                    break;
+                case 5:
+                    System.out.println("Saindo...");
                     break;
                 default:
                     System.out.println("Opcao Invalida.");
