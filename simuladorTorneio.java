@@ -1,8 +1,5 @@
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.io.File;
 import java.util.Scanner;
 
@@ -37,11 +34,11 @@ public class simuladorTorneio implements Serializable{
                         gravar_arquivo();
                         break;
                     case 4: 
-                        ler_arquivo();
+                        campeonato = ler_arquivo(campeonato);
                         break;
                     case 5:
                         System.out.println("Saindo...");
-                        sair =5;
+                        sair = 5;
                         break;
                     default:
                         System.out.println("Opcao Invalida.");
@@ -51,8 +48,8 @@ public class simuladorTorneio implements Serializable{
         }
     }
 
-    public static void ler_arquivo(){
-        File arquivo = new File("campeonato.dat");
+    public static Torneio[] ler_arquivo(Torneio campeonato){
+        File arquivo = new File("backup.dat");
   
         try {
             FileInputStream fin = new FileInputStream(arquivo);
@@ -60,17 +57,23 @@ public class simuladorTorneio implements Serializable{
             /*Lendo os objetos de um arquivo e fazendo a
             coercao de tipos*/
             
-            //Pessoa[] agendaArq = (Pessoa[]) oin.readObject();
+            campeonato = (Torneio[]) oin.readObject();
             oin.close();
             fin.close();
         
             //Uma forma de diferente do for para percorrer vetores
-            /*for (Pessoa p : agendaArq) {
-                p.imprimirDados();
-            }*/
+            for (Torneio c : campeonato){
+                if (c != null){
+                    System.out.println(c);
+                }
+            }
         }catch (Exception ex) {
             System.err.println("erro: " + ex.toString());
         }
+
+        System.out.println("\n\nArquivos importados com sucesso!");
+
+        return campeonato;
     }
 
     public static void gravar_arquivo(){
