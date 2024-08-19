@@ -80,7 +80,6 @@ public class Torneio{
     // Premia os vencedores da rodada, e desconta daqueles que perderam.
     public void premiacao(int aux){
         for(int i = 0; i < numJogadores; i++){
-            if(jogadores[i].getSaldo()> 0){
                 if (vencedores[i] == 1){ // Indica que o jogador "i" venceu.
                     System.out.println("==> O jogador "+(i + 1)+" venceu a rodada. <==");
                     // Utiliza o contador para verificar quantos jogadores venceram e premiar de forma igual.
@@ -96,9 +95,9 @@ public class Torneio{
                     System.out.println("== O jogador "+ (i+1)+ " perdeu a rodada. ==");
                     // Desconta o valor apostado.
                     jogadores[i].setSaldo(jogadores[i].getSaldo() - jogadores[i].getValorDeAposta());
-                    }
+                }
             }
-        }
+        
     }
 
     public void Azar(){
@@ -106,8 +105,8 @@ public class Torneio{
         apostar();
 
         for(int i = 0; i < numJogadores; i++){
-            if(jogadores[i].getSaldo() <= 0){
-            }else{ // Verifica se o saldo do jogador eh maior do que 0, 
+            if(jogadores[i].getSaldo() > 0){
+             // Verifica se o saldo do jogador eh maior do que 0, 
                                             // para que o jogador possa apostar.
                 System.out.println("----------------------------------");
                 System.out.println("Jogador "+ (i+1));
@@ -117,7 +116,6 @@ public class Torneio{
                 // jogador perdeu ou ganhou, alem de executar a rodada do Jogo de Azar.
                 if(r == 0){ // Verifica se o jogador perdeu.
                     vencedores[i] = 0; // Identifica como 0 quem perdeu e como 1 quem ganhou.
-                    jogadores[i].setSaldo(jogadores[i].getSaldo() - jogadores[i].getValorDeAposta());
                 }
                 else{
                     contVen++; //Incrementa o contador de vencedores.
@@ -171,53 +169,60 @@ public class Torneio{
     // Inicia o torneio
     public void iniciarTorneio(int numJog){
         int opcao = 0;
-        //while(opcao !=4){
+
         setJogadores(numJog); // Define o numero maximo de jogadores com os dados passados pelo operador.
         addJogadores();// Define o Id, o Saldo e o Tipo de cada jogador.
-
-        // Menu para decidir qual jogo sera jogado.
-        System.out.println("1) Jogo de Azar;");
-        System.out.println("2) Jogo do Porquinho;");
-        System.out.println("3) Sair.");
-        System.out.println("Selecione o jogo que deseja jogar:");
-        opcao = teclado.nextInt();
-
-        switch(opcao){
-            case 1:
-               do{ // Repeticao para definir o numero de rodadas, ate que reste apenas um vencedor.
-                   Azar();
-                   int cont = 0;
-                   for (int i = 0; i < numJogadores; i++){
-                       if (jogadores[i].getSaldo() <= 0){
-                           cont++;
+        
+        while(opcao !=4){
+            // Menu para decidir qual jogo sera jogado.
+            System.out.println("1) Jogo de Azar;");
+            System.out.println("2) Jogo do Porquinho;");
+            System.out.println("3) Resetar moedas.");
+            System.out.println("4) Sair.");
+            System.out.println("Selecione o jogo que deseja jogar:");
+            opcao = teclado.nextInt();
+        
+            switch(opcao){
+                case 1:
+                   do{ // Repeticao para definir o numero de rodadas, ate que reste apenas um vencedor.
+                       Azar();
+                       int cont = 0;
+                       for (int i = 0; i < numJogadores; i++){
+                           if (jogadores[i].getSaldo() <= 0){
+                               cont++;
+                           }
                        }
-                   }
-                   if (cont == numJogadores-1){
-                       break;
-                   }
-               }while(aux != 1);
-                break;
-            case 2:
-                do{ // Repeticao para definir o numero de rodadas, ate que reste apenas um vencedor.
-                    JogoPorquinho();
-                    int cont = 0;
-                    for (int i = 0; i < numJogadores; i++){
-                        if (jogadores[i].getSaldo() <= 0){
-                            cont++;
+                       if (cont == numJogadores-1){
+                           break;
+                       }
+                   }while(aux != 1);
+                    break;
+                case 2:
+                    do{ // Repeticao para definir o numero de rodadas, ate que reste apenas um vencedor.
+                        JogoPorquinho();
+                        int cont = 0;
+                        for (int i = 0; i < numJogadores; i++){
+                            if (jogadores[i].getSaldo() <= 0){
+                                cont++;
+                            }
                         }
-                    }
-                    if (cont == numJogadores-1){
-                        break;
-                    }
-                }while(aux != 1);
-                break;                
-            case 3:
-                System.out.println("Saindo...");
-                break;
-            default:
-                System.out.println("Opcao invalida.");
+                        if (cont == numJogadores-1){
+                            break;
+                        }
+                    }while(aux != 1);
+                    break;                
+                case 3:
+                    for (int i = 0; i < numJogadores; i++)
+                        jogadores[i].setSaldo(100);
+                    
+                    break;
+                case 4:
+                    System.out.println("Saindo...");
+                    break;
+                default:
+                    System.out.println("Opcao invalida.");
             }
-        //}
+        }
     }
 
     public void mostrarPlacarFinal(){
