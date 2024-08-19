@@ -1,42 +1,12 @@
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Scanner;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.Serializable;
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
 public class simuladorTorneio implements Serializable{
-<<<<<<< HEAD
-    public static void main(String[] args){
-        Scanner teclado = new Scanner(System.in);
-        int opcao;
-
-        System.out.println("==== MENU INICIAL ====");
-        System.out.println("1) Novo torneio;");
-        System.out.println("2) Ler arquivo;");
-        System.out.println("3) Sair.");
-        System.out.println("Selecione a opcao desejada:");
-        opcao = teclado.nextInt();
-
-        switch (opcao){
-            case 1:
-                break;
-
-            case 2:
-                break;
-        }
-
-=======
-    public static final Scanner teclado = new Scanner(System.in);
-    public static void main(String[] args){
->>>>>>> 7ee3d369fd0b3da45613c74e7083bbf78453a0d1
         System.out.println("Insira o numero de jogadores: ");
         int num = teclado.nextInt();
 
@@ -70,7 +40,6 @@ public class simuladorTorneio implements Serializable{
         }
     }
 
-<<<<<<< HEAD
     public static void ler_arquivo(){
         File arquivo = new File("campeonato.dat");
   
@@ -107,13 +76,5 @@ public class simuladorTorneio implements Serializable{
         catch (Exception ex) {
             System.err.println("erro: " + ex.toString());
         }
-=======
-    private static void salvarTorneio(){
-
-    }
-
-    private static void carregarTorneio(){
->>>>>>> 7ee3d369fd0b3da45613c74e7083bbf78453a0d1
-
     }
 }
