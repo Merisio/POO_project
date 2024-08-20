@@ -134,33 +134,35 @@ public class Torneio implements Serializable{
         apostar();
 
         for (int i = 0; i < numJogadores; i++){
-            System.out.println("----------------------------------");
-            System.out.println("Jogador "+ (i+1));
-            System.out.println("----------------------------------");
-            int resultado2 = jogadores[i].resultadoPorc();
-
-            if(menor == 0){
-                menor = resultado2;
-                ganhador = (i+1);
-            }else if(resultado2 == menor){
-                ganhador = 0;
-            }else if(resultado2 < menor){
-                menor = resultado2;
-                ganhador = (i+1);
+            if(jogadores[i].getSaldo() > 0){
+                System.out.println("----------------------------------");
+                System.out.println("Jogador "+ (i+1));
+                System.out.println("----------------------------------");
+                int resultado2 = jogadores[i].resultadoPorc();
+                //Chama a funcao resultado, que retorna o numero de lancamentos do jogador
+                if(menor == 0){              //Atribui o numero de lancamentos do primeiro jogador para a variavel menor
+                    menor = resultado2;
+                    ganhador = (i+1);
+                }else if(resultado2 == menor){ //Compara os resultados de um jogador com os resultados do outro
+                    ganhador = 0;               //Se forem iguais, significa que deu empate, entao nao tem ganhador(ganhador=0)
+                }else if(resultado2 < menor){   //Se o resultado do segundo jogador for menor,  
+                    menor = resultado2;         //a variavel menor recebe esse resultado e ganhador passa a ser o Id do jogador
+                    ganhador = (i+1);           
+                }
+                //System.out.println("menor"+menor);  // testando
+                System.out.println("Resultado Jogador "+(i+1) +": "+ resultado2);  //imprime o resultado de cada jogador a cada rodada
+                vencedores[i]=0;
             }
-            //System.out.println("menor"+menor);  // testando
-            System.out.println("Resultado Jogador "+(i+1) +": "+ resultado2);
-            System.out.println("");
-            vencedores[i]=0;
         }
-        if(ganhador == 0){
+        if(ganhador == 0){ //verifica se houve algum ganhador
             System.out.println("Empate");
         }
         else{
-            vencedores[ganhador-1] = 1;
+            vencedores[ganhador-1] = 1; //Caso haja um ganhador e atribuido "1" ao vetor de vencedores, para fazer a premiacao
         }
         System.out.println("");
         premiacao(0);
+        premio=0;
     }
 
     // Inicia o torneio
