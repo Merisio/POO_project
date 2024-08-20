@@ -48,7 +48,7 @@ public class simuladorTorneio{
                         gravar_arquivo();
                         break;
                     case 4:// Le um arquivo de um torneio.
-                        //campeonato = ler_arquivo();
+                        campeonato = ler_arquivo();
                         break;
                     case 5:
                         System.out.println("Saindo...");
@@ -62,7 +62,7 @@ public class simuladorTorneio{
         }
     }
 
-    /*public static Torneio ler_arquivo(){
+    public static Torneio ler_arquivo(){
         File arquivo = new File("campeonato.dat");
   
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(arquivo));) {
@@ -74,13 +74,13 @@ public class simuladorTorneio{
         }
 
         return campeonato;
-    }*/
+    }
 
     public static void gravar_arquivo(){
         File arquivo = new File("campeonato.dat");
         try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(arquivo))) {
             // gravando o vetor de pessoas no arquivo
-            oos.writeObject(arquivo);
+            oos.writeObject(campeonato);
             System.out.println("Torneio salvo com sucesso no arquivo " + arquivo);
         }
         catch (Exception ex) {

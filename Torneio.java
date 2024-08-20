@@ -3,7 +3,6 @@ import java.util.Scanner;
 
 // Classe Torneio, para a execucao das rodadas e manipulacao de vetores da classe Jogador.
 public class Torneio implements Serializable{
-    Scanner teclado = new Scanner(System.in);
     private Jogador[] jogadores = new Jogador[10]; // Vetor de 10 jogadores (maximo permitido).
     private int numJogadores; // Numero de jogadores nesse campeonato.
     private int[] vencedores = new int[10]; // Vetor de verificacao para ver qual jogador perdeu e qual ganhou a rodada.
@@ -25,6 +24,7 @@ public class Torneio implements Serializable{
 
     // Realiza a adicao dos jogadores
     public void addJogadores(){
+        Scanner teclado = new Scanner(System.in);
         setVetor(); // Inicializa o vetor de jogadores como 0.
         System.out.printf("\n");
 
@@ -41,6 +41,7 @@ public class Torneio implements Serializable{
     }
 
     public void apostar(){
+        Scanner teclado = new Scanner(System.in);
         for(int i = 0; i < numJogadores; i++){// Repeticao para operar com o vetor de jogadores.
             if(jogadores[i].getTipo() == 0){
             // Verifica se o jogador eh do tipo humano, solicitando que o jogador 
@@ -101,7 +102,7 @@ public class Torneio implements Serializable{
     public void Azar(){
         int contVen = 0;
         apostar();
-
+        Scanner teclado = new Scanner(System.in);
         for(int i = 0; i < numJogadores; i++){
             if(jogadores[i].getSaldo() > 0){ // Verifica se o saldo do jogador eh maior do que 0, 
                                              // para que o jogador possa apostar
@@ -168,7 +169,7 @@ public class Torneio implements Serializable{
     // Inicia o torneio
     public Jogador[] iniciarTorneio(int numJog){
         int opcao = 0;
-
+        Scanner teclado = new Scanner(System.in);
         setJogadores(numJog); // Define o numero maximo de jogadores com os dados passados pelo operador.
         addJogadores();// Define o Id, o Saldo e o Tipo de cada jogador.
 
