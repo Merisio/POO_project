@@ -3,38 +3,48 @@ import java.io.ObjectInputStream;
 import java.io.File;
 import java.util.Scanner;
 
-public class simuladorTorneio implements Serializable{
-
+// Classe aplicativa.
+public class simuladorTorneio{
     public static final Scanner teclado = new Scanner(System.in);
     public static void main(String[] args){
-        System.out.println("Insira o numero de jogadores: ");
-        int num = teclado.nextInt();
-        int sair =0;
+        int num = 0; // Variavel que recebera o numero de jogadores, informado pelo usuario
+        System.out.println("==== BEM VINDO AO NOSSO CASSINO ONLINE! ====: ");
+        System.out.printf("Insira o numero de participantes: ");
+        num = teclado.nextInt();
+        int sair = 0;
 
-        while(sair != 5){
+        Jogador[] players = new Jogador[10]; // Vetor que recebe os resultados do torneio. 
+        for (int i = 0; i < 10; i++)
+            players[i] = new Jogador(0, 0, 0); // Vetor eh inicializado com 0.
+
+        while(sair != 5){// Primeiro loop para execucao do menu.
             if (num >= 2){
                 Torneio campeonato = new Torneio();
+                System.out.printf("\n");
                 System.out.println("==== MENU INICIAL ====");
-                System.out.println("1) Comecar novo Campeonato.");
-                System.out.println("2) Ver placar.");
-                System.out.println("3) Salvar Campeonato.");
-                System.out.println("4) Carregar Campeonato.");
+                System.out.println("1) Comecar novo torneio;");
+                System.out.println("2) Ver placar;");
+                System.out.println("3) Salvar torneio;");
+                System.out.println("4) Carregar torneio;");
                 System.out.println("5) Sair.");
-                System.out.println("Selecione o que deseja:");
+                System.out.printf("Selecione o que deseja: ");
                 int opcao = teclado.nextInt();
 
                 switch (opcao) {
-                    case 1:
-                        campeonato.iniciarTorneio(num);  
+                    case 1:// Cria um novo torneio.
+                        players = campeonato.iniciarTorneio(num); 
+                        /*for (int i = 0; i < campeonato.getJogadores(); i++)
+                            System.out.println("Vetor de saldo de jogadores: "+players[i].getSaldo());*/
+                        
                         break;
-                    case 2:
-                        campeonato.mostrarPlacarFinal();
+                    case 2:// Mostra o placar final do torneio anterior.
+                        campeonato.mostrarPlacarFinal(players, num);
                         break;
-                    case 3:
-                        gravar_arquivo();
+                    case 3:// Grava o arquivo do torneio corrente.
+                        //gravar_arquivo();
                         break;
-                    case 4: 
-                        campeonato = ler_arquivo(campeonato);
+                    case 4:// Le um arquivo de um torneio.
+                        //campeonato = ler_arquivo(campeonato);
                         break;
                     case 5:
                         System.out.println("Saindo...");
@@ -44,18 +54,17 @@ public class simuladorTorneio implements Serializable{
                         System.out.println("Opcao Invalida.");
                         break;
                 }
-        }
+            }
         }
     }
 
-    public static Torneio[] ler_arquivo(Torneio campeonato){
+    /*public static Torneio[] ler_arquivo(Torneio campeonato){
         File arquivo = new File("backup.dat");
   
         try {
             FileInputStream fin = new FileInputStream(arquivo);
             ObjectInputStream oin = new ObjectInputStream(fin);
-            /*Lendo os objetos de um arquivo e fazendo a
-            coercao de tipos*/
+            //Lendo os objetos de um arquivo e fazendo a coercao de tipos
             
             campeonato = (Torneio[]) oin.readObject();
             oin.close();
@@ -67,7 +76,8 @@ public class simuladorTorneio implements Serializable{
                     System.out.println(c);
                 }
             }
-        }catch (Exception ex) {
+        }
+        catch (Exception ex) {
             System.err.println("erro: " + ex.toString());
         }
 
@@ -90,5 +100,5 @@ public class simuladorTorneio implements Serializable{
         catch (Exception ex) {
             System.err.println("erro: " + ex.toString());
         }
-    }
+    }*/
 }

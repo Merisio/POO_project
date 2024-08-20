@@ -1,9 +1,10 @@
+// Classe Jogador, que representa cada jogador do Torneio
 public class Jogador{
     private JogoDado jogo;
-    private int id;
-    private int tipo;
-    private int saldo;
-    private int valorDeAposta;
+    private int id;// Numero de identificacao do jogador.
+    private int tipo; // Maquina ou humano.
+    private int saldo; // Saldo total.
+    private int valorDeAposta; // Valor que o jogador deseja apostar na rodada.
 
     // Construtores.
     public Jogador(int tipo){
@@ -55,6 +56,5 @@ public class Jogador{
         jogo = new JogoDado(2);
         jogo.aplicaPorquinho();
         return jogo.getResult();
-
     }
 }

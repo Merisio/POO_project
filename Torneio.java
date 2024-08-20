@@ -9,6 +9,7 @@ public class Torneio implements Serializable{
     private int numRodadas; // Numero de rodadas.
     private int[] vencedores = new int[10]; // Vetor de verificacao para ver qual jogador perdeu e qual ganhou a rodada.
     private int ganhador, aux, cont = 0, premio = 0; // Acumula os valores de aposta de todos os jogadores na variavel premio.
+    
     // Getters
     public int getRodada(){
         return numRodadas;
@@ -31,12 +32,16 @@ public class Torneio implements Serializable{
 
     // Realiza a adicao dos jogadores
     public void addJogadores(){
-        setVetor();
+        setVetor(); // Inicializa o vetor de jogadores como 0.
+        System.out.printf("\n");
+
+        // Seta os valores dos jogadores de acordo com o padrao passado pelo trabalho.
         for (int i = 0; i < this.numJogadores; i++){
             jogadores[i].setSaldo(100);
             jogadores[i].setId(i+1);
-            System.out.println("");
-            System.out.println("Insira o tipo do jogador " + (i+1) + "(0 para humano e 1 para maquina):");
+
+            // Pede o tipo do jogador, para ser informado pelo usuario.
+            System.out.printf("Insira o tipo do jogador " + (i+1) + "(0 para humano e 1 para maquina): ");
             int tipo = teclado.nextInt();
             jogadores[i].setTipo(tipo);
         }
@@ -50,7 +55,7 @@ public class Torneio implements Serializable{
                 if (jogadores[i].getSaldo() == 0)
                     System.out.println("O jogador "+(i+1)+" nao possui mais moedas.");
                 else{  
-                    System.out.println("Saldo Do jogador "+(i+1)+": " +jogadores[i].getSaldo()+" moedas. Insira o valor da aposta: ");
+                    System.out.printf("Saldo Do jogador "+(i+1)+": " +jogadores[i].getSaldo()+" moedas. Insira o valor da aposta: ");
                     int aposta = teclado.nextInt();
 
                     if(aposta <= jogadores[i].getSaldo()){ // Verificacao para que o jogador nao 
@@ -99,6 +104,7 @@ public class Torneio implements Serializable{
         }
     }
 
+    // Funcao que executa o Jogo de Azar.
     public void Azar(){
         int contVen = 0;
         apostar();
@@ -129,6 +135,7 @@ public class Torneio implements Serializable{
         premio = 0;
     }
 
+    // Funcao que executa o Jogo do Porquinho.
     public void JogoPorquinho(){
         int menor = 0;
         apostar();
@@ -157,7 +164,6 @@ public class Torneio implements Serializable{
             System.out.println("Empate");
         }
         else{
-            System.out.println("Ganhador - Jogador "+ganhador);
             vencedores[ganhador-1] = 1;
         }
         System.out.println("");
@@ -165,75 +171,81 @@ public class Torneio implements Serializable{
     }
 
     // Inicia o torneio
-    public void iniciarTorneio(int numJog){
+    public Jogador[] iniciarTorneio(int numJog){
         int opcao = 0;
 
         setJogadores(numJog); // Define o numero maximo de jogadores com os dados passados pelo operador.
         addJogadores();// Define o Id, o Saldo e o Tipo de cada jogador.
 
         // Menu para decidir qual jogo sera jogado.
+        System.out.printf("\n");
         System.out.println("==== MENU DE JOGOS ====");
         System.out.println("1) Jogo de Azar;");
         System.out.println("2) Jogo do Porquinho;");
         System.out.println("3) Sair.");
-        System.out.println("Selecione o jogo que deseja jogar:");
+        System.out.printf("Selecione o jogo que deseja jogar: ");
         opcao = teclado.nextInt();
+        System.out.printf("\n");
 
         switch(opcao){
             case 1:
                 do{ // Repeticao para definir o numero de rodadas, ate que reste apenas um vencedor.
                     Azar();
-                       for (int i = 0; i < numJogadores; i++){
-                           if (jogadores[i].getSaldo() <= 0){
-                               cont++;
-                           }
-                           if (cont == numJogadores-1)
+
+                    for (int i = 0; i < numJogadores; i++){
+                        if (jogadores[i].getSaldo() <= 0)
+                            cont++;
+                        if (cont == numJogadores-1)
                             break;
-                        }
-                    }while(cont != numJogadores-1);
+                    }
+                } while(cont != numJogadores-1);
             
                 cont = 0;
                 break;
             case 2:
                 do{ // Repeticao para definir o numero de rodadas, ate que reste apenas um vencedor.
                     JogoPorquinho();
+
                     for (int i = 0; i < numJogadores; i++){
-                        if (jogadores[i].getSaldo() <= 0){
+                        if (jogadores[i].getSaldo() <= 0)
                             cont++;
-                        }
                     }
-                    if (cont == numJogadores-1){
+                    if (cont == numJogadores-1)
                         break;
-                    }
-                }while(aux != 1);
+                    
+                } while(aux != 1);
+
                 cont=0;
                 break;                
             case 3:
-                for (int i = 0; i < numJogadores; i++)
-                    jogadores[i].setSaldo(100);
-                
-                break;
-            case 4:
                 System.out.println("Saindo...");
                 break;
             default:
                 System.out.println("Opcao invalida.");
         }
+        return jogadores;
     }
 
-    public void mostrarPlacarFinal(){
-        int winner = 0;
+    // Funcao que mostra o placar final do torneio, com o saldo final de cada jogador e quem ganhou.
+    public void mostrarPlacarFinal(Jogador[] players, int num){
+        int winner = 0; // Variavel que identifica qual eh o vencedor.
 
-        for (int i = 0; i < numJogadores; i++){
-            System.out.println("Saldo do jogador "+(i+1)+": "+(jogadores[i].getSaldo()));
+        System.out.printf("\n");
+        System.err.println("==== PLACAR FINAL DO TORNEIO! ====");
+
+        for (int i = 0; i < num; i++){// Loop para operar o vetor de jogadores.
+            System.out.println("Saldo do jogador "+(i+1)+": "+(players[i].getSaldo()));
+            // Mostra o saldo de cada jogador.
             
-            if (jogadores[i].getSaldo() > 0)
+            if (players[i].getSaldo() > 0) // Identifica o unico vencedor do torneio.
                 winner = i + 1;
         }
         if (winner == 0)
-            System.out.println("Ambos os jogadores perderam.");
-        else
-            System.out.println("O vencedor foi o jogador "+winner+".");
+        // Se nao houve nenhum vencedor, quer dizer que ambos os jogadores perderam tudo na mesma rodada, 
+        // fazendo com que haja um empate.
+            System.out.println("Ambos os jogadores perderam. Mais sorte na proxima vez!!");
+        else // Se há um vencedor, ele eh mostrado na tela.
+            System.out.println("O vencedor foi o jogador "+winner+". PARABENS!");
     }
 }
     
