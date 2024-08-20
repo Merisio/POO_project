@@ -6,22 +6,15 @@ public class Torneio implements Serializable{
     Scanner teclado = new Scanner(System.in);
     private Jogador[] jogadores = new Jogador[10]; // Vetor de 10 jogadores (maximo permitido).
     private int numJogadores; // Numero de jogadores nesse campeonato.
-    private int numRodadas; // Numero de rodadas.
     private int[] vencedores = new int[10]; // Vetor de verificacao para ver qual jogador perdeu e qual ganhou a rodada.
     private int ganhador, aux, cont = 0, premio = 0; // Acumula os valores de aposta de todos os jogadores na variavel premio.
     
     // Getters
-    public int getRodada(){
-        return numRodadas;
-    }
     public int getJogadores(){
         return numJogadores;
     }
-
+    
     // Setters
-    public void setRodada(int nr){
-        this.numRodadas = nr;
-    }
     public void setJogadores(int nj){
         this.numJogadores = nj;
     }
